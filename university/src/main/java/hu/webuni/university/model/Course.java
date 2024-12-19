@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedAttributeNode;
+import jakarta.persistence.NamedEntityGraph;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(onlyExplicitlyIncluded = true)
+@NamedEntityGraph(
+		name="Course.students",
+		attributeNodes = @NamedAttributeNode("students")
+)
+@NamedEntityGraph(
+		name="Course.teachers",
+		attributeNodes = @NamedAttributeNode("teachers")
+)
+
 public class Course {
 
 	@Id
