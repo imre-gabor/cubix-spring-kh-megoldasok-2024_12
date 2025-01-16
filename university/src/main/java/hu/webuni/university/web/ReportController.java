@@ -30,7 +30,7 @@ public class ReportController {
 		}
 		
 		return CompletableFuture.completedFuture(
-				Collections.emptyList() //TODO: repository metódus hívása
+				courseRepository.getCourseStats()
 				);
 	}
 }

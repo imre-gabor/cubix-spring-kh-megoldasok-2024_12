@@ -60,7 +60,7 @@ public class CourseController implements CourseControllerApi {
 	public ResponseEntity<CourseDto> getVersionAt(Integer id, @NotNull @Valid OffsetDateTime at) {
 		return ResponseEntity.ok(
 				courseMapper.courseToDto(
-					null //TODO: servie metódus meghívása
+					courseService.getVersionAt(id, at)
 				)
 			);
 	}

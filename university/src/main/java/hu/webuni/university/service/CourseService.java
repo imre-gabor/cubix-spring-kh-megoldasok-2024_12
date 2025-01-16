@@ -1,7 +1,10 @@
 package hu.webuni.university.service;
 
+import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.DefaultRevisionEntity;
@@ -19,6 +22,8 @@ import hu.webuni.university.model.HistoryData;
 import hu.webuni.university.model.QCourse;
 import hu.webuni.university.repository.CourseRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
@@ -29,9 +34,11 @@ public class CourseService {
 	
 	private final CourseRepository courseRepository;
 	
+	@PersistenceContext
 	private EntityManager em;
 
 	@Transactional
+	@Cacheable("courseSearchResults")
 	public Iterable<Course> searchCourses(Predicate predicate, Pageable pageable) {
 		
 		//List<Course> courses = courseRepository.findAll(predicate, "Course.students", Sort.unsorted());
@@ -69,6 +76,15 @@ public class CourseService {
 					return historyData;
 				}).toList();
 		return resultList;
+	}
+	
+	@Transactional
+	public Course getVersionAt(Integer id, OffsetDateTime at) {
+		
+		Course course = AuditReaderFactory.get(em).find(Course.class, id, Date.from(at.toInstant()));
+		course.getStudents().size();
+		course.getTeachers().size();
+		return course;
 	}
 
 

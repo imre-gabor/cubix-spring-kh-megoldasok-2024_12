@@ -1,10 +1,17 @@
 package hu.webuni.university.aspect;
 
+import java.lang.reflect.Method;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.stereotype.Component;
 
+@Aspect
+@Component
 public class RetryAspect {
 	   
     @Pointcut("@annotation(hu.webuni.university.aspect.Retry) || @within(hu.webuni.university.aspect.Retry)")
@@ -12,11 +19,19 @@ public class RetryAspect {
     }
  
     @Around("retryPointCut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
+    //@Around("retryPointCut() && @annotation(retry)") --> nem működik, ha osztály szinten van a @Retry
+    public Object around(ProceedingJoinPoint joinPoint/*, Retry retry*/) throws Throwable {
         
     	Retry retry = null;
         Signature signature = joinPoint.getSignature();
-        //TODO: retry annotáció példány kinyerése
+        
+        if(signature instanceof MethodSignature methodSignature) {
+        	Method method = methodSignature.getMethod();
+        	retry = method.getAnnotation(Retry.class);
+        	if(retry == null) {
+        		retry = method.getDeclaringClass().getAnnotation(Retry.class);
+        	}
+        } 
         
         int times = retry.times();
         long waitTime = retry.waitTime();
