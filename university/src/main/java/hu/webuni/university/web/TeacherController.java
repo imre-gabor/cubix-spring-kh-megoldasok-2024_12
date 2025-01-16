@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import hu.webuni.university.dto.TeacherDto;
+import hu.webuni.university.api.model.TeacherDto;
 import hu.webuni.university.mapper.TeacherMapper;
 import hu.webuni.university.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;

@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import org.hibernate.envers.Audited;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Audited
 @Entity
 @Data
 @Builder
@@ -39,4 +41,7 @@ public class Student {
 	
 	@ManyToMany(mappedBy = "students")
 	private Set<Course> courses;
+	
+	private Integer eduId;
+	private Integer numFreeSemesters;
 }

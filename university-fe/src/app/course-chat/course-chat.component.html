@@ -1,0 +1,32 @@
+<h1>Chat room of course {{courseId}}</h1>
+
+
+<div class="container">
+    <div class="chat-content">
+        <div class="card">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let chatMessage of chatMessages">
+                    <span>{{chatMessage}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <form (ngSubmit)="sendMessage()" #productForm="ngForm">
+        <div class="form-group col-2 p-3">
+            <label for="sender">Sender</label>
+            <input type="text" class="form-control" id="sender"
+                required
+                [(ngModel)]="sender" name="sender">
+        </div>
+
+        <div class="form-group col-2 p-3">
+            <label for="text">Text</label>
+            <input type="text" class="form-control" id="text"
+                required
+                [(ngModel)]="text" name="text">
+        </div>
+
+        <button type="submit" class="btn btn-success m-3">Send</button>
+    </form>
+</div>

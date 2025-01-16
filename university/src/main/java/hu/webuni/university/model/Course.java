@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.NamedEntityGraph;
+import org.hibernate.envers.Audited;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Audited
 @Entity
 @Data
 @Builder
@@ -22,15 +24,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString(onlyExplicitlyIncluded = true)
-@NamedEntityGraph(
-		name="Course.students",
-		attributeNodes = @NamedAttributeNode("students")
-)
-@NamedEntityGraph(
-		name="Course.teachers",
-		attributeNodes = @NamedAttributeNode("teachers")
-)
-
+@NamedEntityGraph(name="Course.students", attributeNodes = @NamedAttributeNode("students"))
+@NamedEntityGraph(name="Course.teachers", attributeNodes = @NamedAttributeNode("teachers"))
 public class Course {
 
 	@Id

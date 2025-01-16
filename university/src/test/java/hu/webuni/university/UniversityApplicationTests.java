@@ -1,4 +1,4 @@
-package hu.webuni;
+package hu.webuni.university;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
