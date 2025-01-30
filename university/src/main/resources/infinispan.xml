@@ -19,6 +19,12 @@
          <expiration max-idle="10000" interval="2000"/>
          <memory max-count="10000"/>
       </local-cache>
+      
+      <local-cache name="studentTimetableResults" >
+         <transaction mode="NONE" />
+         <expiration max-idle="10000" interval="2000"/>
+         <memory max-count="10000"/>
+      </local-cache>
    </cache-container>
 
 </infinispan>

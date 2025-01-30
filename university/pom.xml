@@ -98,16 +98,16 @@
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>0.2.2</version>
 		</dependency>
-<!--		<dependency>-->
-<!--            <groupId>com.sun.xml.ws</groupId>-->
-<!--            <artifactId>jaxws-rt</artifactId>-->
-<!--            <version>4.0.0</version>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>jakarta.xml.ws</groupId>-->
-<!--            <artifactId>jakarta.xml.ws-api</artifactId>-->
-<!--        </dependency>-->
+		<dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>4.0.0</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.ws</groupId>
+            <artifactId>jakarta.xml.ws-api</artifactId>
+        </dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -222,25 +222,25 @@
 					</execution>
 				</executions>
 			</plugin>
-<!-- 			<plugin> -->
-<!-- 				<groupId>com.sun.xml.ws</groupId> -->
-<!-- 				<artifactId>jaxws-maven-plugin</artifactId> -->
-<!-- 				<version>4.0.1</version> -->
-<!-- 				<executions> -->
-<!-- 					<execution> -->
-<!-- 						<goals> -->
-<!-- 							<goal>wsimport</goal> -->
-<!-- 						</goals> -->
-<!-- 					</execution> -->
-<!-- 				</executions> -->
-<!-- 				<configuration> -->
-<!-- 					<packageName>hu.webuni.eduservice.wsclient</packageName> -->
-<!-- 					<wsdlUrls> -->
-<!-- 						<wsdlUrl>http://localhost:8081/services/student?wsdl</wsdlUrl> -->
-<!-- 					</wsdlUrls> -->
-<!-- 				</configuration> -->
+ 			<plugin> 
+ 				<groupId>com.sun.xml.ws</groupId> 
+ 				<artifactId>jaxws-maven-plugin</artifactId> 
+ 				<version>4.0.1</version> 
+ 				<executions> 
+ 					<execution> 
+ 						<goals> 
+ 							<goal>wsimport</goal> 
+ 						</goals> 
+ 					</execution> 
+ 				</executions> 
+ 				<configuration> 
+ 					<packageName>hu.webuni.eduservice.wsclient</packageName> 
+ 					<wsdlUrls> 
+ 						<wsdlUrl>http://localhost:8081/services/student?wsdl</wsdlUrl> 
+ 					</wsdlUrls> 
+ 				</configuration> 
 
-<!-- 			</plugin> -->
+ 			</plugin> 
 		</plugins>
 	</build>
 
