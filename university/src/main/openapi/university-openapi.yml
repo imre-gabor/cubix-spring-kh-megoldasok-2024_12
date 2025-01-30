@@ -141,6 +141,91 @@ paths:
                   format: binary
       tags:
         - student-controller
+  /api/timetable:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - time-table-controller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeTableDto'
+      operationId: get-timetable
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: studentId
+        - schema:
+            type: integer
+          in: query
+          name: teacherId
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: from
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: until
+  /api/timetable/search:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - time-table-controller
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeTableItemDto'
+      operationId: search-time-table
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: studentId
+        - schema:
+            type: integer
+          in: query
+          name: teacherId
+        - schema:
+            type: string
+            format: date
+          in: query
+          name: from
+        - schema:
+            type: string
+          in: query
+          name: course
+      description: ''
+  '/api/courses/{courseId}/cancelLesson/{day}':
+    parameters:
+      - schema:
+          type: integer
+        name: courseId
+        in: path
+        required: true
+      - schema:
+          type: string
+          format: date
+        name: day
+        in: path
+        required: true
+    put:
+      summary: ''
+      operationId: cancel-lesson
+      responses:
+        '200':
+          description: OK
+      tags:
+        - course-controller
 components:
   schemas:
     CourseDto:
@@ -224,3 +309,23 @@ components:
         date:
           type: string
           format: date-time
+    TimeTableDto:
+      title: TimeTableDto
+      type: array
+      items:
+        $ref: '#/components/schemas/TimeTableItemDto'
+    TimeTableItemDto:
+      title: TimeTableItemDto
+      type: object
+      properties:
+        courseName:
+          type: string
+        day:
+          type: string
+          format: date
+        startLesson:
+          type: string
+          format: time
+        endLesson:
+          type: string
+          format: time
