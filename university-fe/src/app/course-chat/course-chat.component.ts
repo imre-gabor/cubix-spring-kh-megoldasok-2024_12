@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Client, StompHeaders } from '@stomp/stompjs';
-
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-course-chat',
@@ -17,7 +17,9 @@ export class CourseChatComponent implements OnInit {
   chatMessages: string[] = [];
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.courseId = Number(this.route.snapshot.paramMap.get('courseId'));
@@ -29,7 +31,7 @@ export class CourseChatComponent implements OnInit {
 
     this.stompClient = new Client({
       brokerURL: '/api/stomp',
-
+      connectHeaders: {'X-Authorization' : 'Bearer ' + this.authService.getToken()},
       onConnect: () => {
         this.subscribeToCourseChat();
       }

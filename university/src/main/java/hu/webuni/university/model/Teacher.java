@@ -15,29 +15,26 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Audited
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
 @ToString(onlyExplicitlyIncluded = true)
 @Cacheable
-public class Teacher {
 
-	@Id
-	@GeneratedValue
-	@ToString.Include
-	@EqualsAndHashCode.Include
-	private int id;
+public class Teacher extends UniversityUser {
 
-	@ToString.Include
-	private String name;
-	
-	private LocalDate birthdate;
 	
 	@ManyToMany(mappedBy = "teachers")
 	private Set<Course> courses;
+	
+	@Override
+	public UserType getUserType() {
+		return UserType.TEACHER;
+	}
 }
