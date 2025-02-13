@@ -43,6 +43,7 @@ public abstract class UniversityUser {
 	
 	private String username;
 	private String password;
+	private String facebookId;
 	
 	public abstract UserType getUserType();
 }

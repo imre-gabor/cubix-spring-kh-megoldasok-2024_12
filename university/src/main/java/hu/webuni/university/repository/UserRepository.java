@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<UniversityUser, Integer>{
 
 	Optional<UniversityUser> findByUsername(String username);
 
+	Optional<UniversityUser> findByFacebookId(String facebookId);
+
 }

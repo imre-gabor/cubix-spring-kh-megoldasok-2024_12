@@ -18,13 +18,15 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 public class JwtService {
 
 	private static final String AUTH = "auth";
+	private static final String COURSEIDS = "courseIds";
 	private Algorithm alg = Algorithm.HMAC256("mysecret");
-	private String issuer = "AirportApp";
+	private String issuer = "UniversityApp";
 	
 	public String creatJwtToken(UserDetails principal) {
 		return JWT.create()
 			.withSubject(principal.getUsername())
 			.withArrayClaim(AUTH, principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new))
+			.withArrayClaim(COURSEIDS, ((UserInfo)principal).getCourseIds().stream().toArray(Integer[]::new))
 			.withExpiresAt(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(20)))
 			.withIssuer(issuer)
 			.sign(alg);
@@ -37,9 +39,11 @@ public class JwtService {
 			.withIssuer(issuer)
 			.build()
 			.verify(jwtToken);
-		return new User(decodedJwt.getSubject(), "dummy", 
+		
+		return new UserInfo(decodedJwt.getSubject(), "dummy", 
 				decodedJwt.getClaim(AUTH).asList(String.class)
-				.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
+				.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()),
+				decodedJwt.getClaim(COURSEIDS).asList(Integer.class)				
 				);
 		
 	}
