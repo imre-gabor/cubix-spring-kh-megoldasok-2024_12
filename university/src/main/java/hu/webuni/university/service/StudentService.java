@@ -53,14 +53,23 @@ public class StudentService {
 			try {
 				Integer eduId = student.getEduId();
 				if(eduId != null) {
-					int numFreeSemesters = centralEducationService.getNumFreeSemestersForStudent(eduId);
-					student.setNumFreeSemesters(numFreeSemesters);
-					studentRepository.save(student);
+					//1. verzió: szinkron XML-WS hívás
+//					int numFreeSemesters = centralEducationService.getNumFreeSemestersForStudent(eduId);
+//					student.setNumFreeSemesters(numFreeSemesters);
+//					studentRepository.save(student);
+
+					//2. verzió: aszinkron üzenetküldés
+					centralEducationService.askNumFreeSemestersForStudent(eduId);
 				}
 			} catch (Exception e) {
 				log.error("Error calling central education service.", e);
 			}
 		});
+	}
+	
+	@Transactional
+	public void updateFreeSemesters(int eduId, int numFreeSemesters) {
+		studentRepository.findByEduId(eduId).ifPresent(student -> student.setNumFreeSemesters(numFreeSemesters));
 	}
 
 	public void saveProfilePicture(Integer id, InputStream is) {

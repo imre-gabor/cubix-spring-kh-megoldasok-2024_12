@@ -22,9 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 	
 	@Autowired
-	UserDetailsService userDetailsService;
-	
-	@Autowired
 	JwtAuthFilter jwtAuthFilter;
 	
 	@Bean
@@ -46,6 +43,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests(auth -> 
 				auth.requestMatchers("/api/login/**").permitAll()
 				.requestMatchers("/api/stomp/**").permitAll()
+				.requestMatchers("/services/**").permitAll()
 				.requestMatchers(HttpMethod.POST, "/api/courses/**").hasAuthority("TEACHER")
 				.requestMatchers(HttpMethod.PUT, "/api/courses/**").hasAuthority("TEACHER")
 				.anyRequest().authenticated()

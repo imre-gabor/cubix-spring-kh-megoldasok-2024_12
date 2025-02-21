@@ -1,0 +1,8 @@
+server:
+  port: 8083
+currency:
+    exchangePremium: 0.02
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8085/eureka/

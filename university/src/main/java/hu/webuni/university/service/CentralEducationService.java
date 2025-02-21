@@ -23,4 +23,8 @@ public class CentralEducationService {
 					.getNumFreeSemestersForStudent(eduId);
 		}
 	}
+
+	public void askNumFreeSemestersForStudent(int eduId) {
+		
+	}
 }
