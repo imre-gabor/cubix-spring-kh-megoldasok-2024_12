@@ -7,6 +7,7 @@ import hu.webuni.bonus.service.BonusService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,6 +23,7 @@ public class BonusController implements BonusApi {
     BonusService bonusService;
     
     @Override
+    @PreAuthorize("#user == authentication.name")
     public double getPoints(String user) {
         return bonusRepository.findById(user)
                 .orElseGet(Bonus::new)

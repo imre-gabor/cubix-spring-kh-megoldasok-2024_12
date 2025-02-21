@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import hu.webuni.university.api.model.TimeTableItemDto;
+import io.github.threetenjaxb.core.LocalDateXmlAdapter;
 import jakarta.jws.WebService;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @WebService
 public interface TimetableWs {
