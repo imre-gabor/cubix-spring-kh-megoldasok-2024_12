@@ -34,6 +34,7 @@ import { LoginComponent } from './login/login.component';
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider(
               '894122598703614'
+              //'654952607212389'
             )
           },
           {
